@@ -6,6 +6,9 @@ __pycache__/
 # pyenv
 .python-version
 
+# pipenv
+Pipfile.lock
+
 # Jupyter Notebook
 .ipynb_checkpoints
 
