@@ -20,7 +20,7 @@ device = torch.device(
 env = gym.make("CartPole-v1")
 # env = gym.make("mujoco") # (?)
 
-# Q-learning with shallow neural network as function approximator.
+# Q-learning with shallow neural network as function approximate.
 # \delta = Q(s, a) - (r - \gamma max_{a}^{'} Q(s^{'}, a))
 # where \delta is temporal difference error and 
 # \gamma is the discount factor.
@@ -29,17 +29,22 @@ env = gym.make("CartPole-v1")
 # [Found Survey Paper] https://doi.org/10.48550/arXiv.2304.00026
 
 # State Space:
-# Speed (Throttle): [0, 1000 or INF]
-# Bank Angle (Aileron): [-180, +180] degrees
-# Pitch (Elevator): [-90, 90] degrees
+# Speed (Throttle): [0, 127 or INF) -> 128 states
+# Bank Angle / Orientation (Aileron): [-180, +180] degrees -> 360 states
+# Pitch (Elevator): [-90, 90] degrees -> 181 states
+# Action Space:
+# Throttle (Speed): [0, 100] -> 100 actions
+# Aileron: [-45, 45] -> 91 actions
+# Elevator: [-45, 45] -> 91 actions
 # State and Action space are continuous.
+# Map states to discrete values and use one hot encoding.
+
+# TODO: formula to compute reward given desired state previous state and current state
+# TODO: method to store and replay previous episodes
 
 class QN(nn.Module):
-    layer_sizes = [32, 64, 32]
+    layer_sizes = [256, 512, 256]
     
-    # Single variable => num_states = 1 and num_actions = 1
-    # All variables => num_states = 3 (speed, bank angle, pitch), 
-    # num_actions = 3 (throttle, aileron, elevator)
     def __init__(self, num_states: int, num_actions: int):
         super(QN, self).__init__()
 
