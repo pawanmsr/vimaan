@@ -24,6 +24,10 @@ Explorations for lightweight interface for small aerial vehicles ([IoT]).
 
 Most of the above are are non commercial and non scalable, and do not incentivize development.
 
+## Network and Data
+
+Monitor network. Store relative spatial location at frequencies greater than monitor frequencies to backtrack on network loss (or shutdown).
+
 ## Control By Command
 
 A command could be as basic as setting the altitude to 1000 meters.

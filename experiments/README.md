@@ -1,0 +1,2 @@
+
+SILABs CP210xxx for UART.
