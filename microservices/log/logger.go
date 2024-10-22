@@ -5,11 +5,11 @@ import (
 	"go.uber.org/zap/zapcore"
 )
 
-func logger(level zapcore.Level) *zap.Logger {
-	distributedDBEncoder := zapcore.NewJSONEncoder(zapcore.EncoderConfig{})
-	syncedWriter := zapcore.AddSync(Writer{})
+var level zapcore.Level = zapcore.DebugLevel
 
-	// verify level
+func Logger() *zap.Logger {
+	distributedDBEncoder := zapcore.NewJSONEncoder(zapcore.EncoderConfig{})
+	syncedWriter := zapcore.AddSync(&Writer{})
 
 	distributedDBCore := zapcore.NewCore(
 		distributedDBEncoder,

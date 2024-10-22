@@ -4,19 +4,20 @@ import "sync"
 
 type Writer struct {
 	// properties
-	mu sync.Mutex
+	me sync.Mutex
 }
 
-func (w Writer) Write(p []byte) (n int, err error) {
-	w.mu.Lock()
-	defer w.mu.Unlock()
+func (w *Writer) Write(p []byte) (n int, err error) {
+	w.me.Lock()
+	// exclusive writes
+	defer w.me.Unlock()
 
 	// implement writer
 
 	return 0, nil
 }
 
-func (w Writer) Close() error {
+func (w *Writer) Close() error {
 	// close open channels
 	return nil
 }
